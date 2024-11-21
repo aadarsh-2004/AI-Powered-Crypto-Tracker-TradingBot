@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 
 const Dashboard = () => {
-  const [selectedCrypto, setSelectedCrypto] = useState("BTCUSDT"); // Default to Bitcoin
+  const [selectedCrypto, setSelectedCrypto] = useState("ETHBTC"); // Default to Bitcoin
   const [fullView, setFullView] = useState(false); // Track full-screen chart view
 
   const { user: currentUser } = useAuth();
@@ -16,16 +16,18 @@ const Dashboard = () => {
     avatar: currentUser?.photoURL,
   };
 
-  const handleCryptoSelection = (cryptoSymbol) => {
-    setSelectedCrypto(cryptoSymbol);
-    setFullView(false); // Ensure it returns to mini view when a new crypto is selected
+  // Handle the selection of a crypto symbol
+  const handleCryptoSelect = (symbol) => {
+    setSelectedCrypto(symbol);
+    setFullView(true);
+     // Ensure it returns to mini view when a new crypto is selected
   };
 
   return (
-    <div className="bg-gray-950 text-white min-h-screen p-8">
+    <div className="bg-gradient-to-tr from-blue-950 via-gray-950 to-black text-white min-h-screen p-8">
       {/* Header */}
       <header className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-orange-400">CryptoTracker</h1>
+        <h1 className="text-4xl font-medium  text-white-400">Crypto Tracker</h1>
 
         {/* Profile Section */}
         <div className="relative">
@@ -44,15 +46,14 @@ const Dashboard = () => {
                 <FiChevronDown className="text-orange-400" />
               </Menu.Button>
             </div>
+
             {/* Dropdown Menu */}
             <Menu.Items className="absolute right-0 mt-2 w-48 bg-black rounded-lg shadow-lg overflow-hidden border border-gray-800">
               <Menu.Item>
                 {({ active }) => (
                   <Link
                     to=".././Profile"
-                    className={`block px-4 py-2 ${
-                      active ? "bg-cardHover text-orange-400" : "text-white"
-                    }`}
+                    className={`block px-4 py-2 ${active ? "bg-cardHover text-orange-400" : "text-white"}`}
                   >
                     View Profile
                   </Link>
@@ -62,9 +63,7 @@ const Dashboard = () => {
                 {({ active }) => (
                   <a
                     href="#settings"
-                    className={`block px-4 py-2 ${
-                      active ? "bg-cardHover text-orange-400" : "text-white"
-                    }`}
+                    className={`block px-4 py-2 ${active ? "bg-cardHover text-orange-400" : "text-white"}`}
                   >
                     Settings
                   </a>
@@ -76,21 +75,24 @@ const Dashboard = () => {
       </header>
 
       {/* Main Dashboard */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="flex justify-between gap-8">
         {/* Crypto Table */}
-        <div className="col-span-2">
-          <CryptoTable onRowClick={handleCryptoSelection} />
+        <div className="w-[830px] ">
+          <CryptoTable onCryptoSelect={handleCryptoSelect} />
+          
+
         </div>
 
         {/* Chart Section */}
-        <div className="bg-cardBg p-6 rounded-lg shadow-neon">
+        <div className={`flex flex-col p-1 items-end rounded-lg shadow-neon bg-cardBg ${fullView ? 'w-full h-fit' : 'w-[600px]'} transition-all duration-300`}>
           <TradingViewChart symbol={selectedCrypto} fullView={fullView} />
           <button
-            className="mt-4 px-4 py-2 bg-orange-400 text-white rounded-lg hover:bg-orange-500"
+            className="mt-1  py-1 text-xl font-semibold  w-[50px] bg-cardBg text-white rounded-lg "
             onClick={() => setFullView(!fullView)}
           >
-            {fullView ? "Close Full View" : "View Full Chart"}
+            {fullView ? "] [" : "[ ]"}
           </button>
+          
         </div>
       </div>
     </div>

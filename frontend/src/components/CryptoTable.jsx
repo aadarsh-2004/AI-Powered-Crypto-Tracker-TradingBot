@@ -11,7 +11,7 @@ const CryptoTable = ({ onCryptoSelect }) => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      setLoading(false);
       try {
         const data = await fetchLiveCryptoData(); 
         const formattedData = data.map((item) => ({
@@ -32,9 +32,8 @@ const CryptoTable = ({ onCryptoSelect }) => {
     };
 
     getData(); 
-
     
-    const intervalId = setInterval(getData, 15000); 
+    const intervalId = setInterval(getData, 1000); 
     
     return () => clearInterval(intervalId);
   }, []);
@@ -64,7 +63,7 @@ const CryptoTable = ({ onCryptoSelect }) => {
   };
 
   return (
-    <div className="bg-cardBg p-6 rounded-lg shadow-md">
+    <div className="bg-cardBg p-8 rounded-xl shadow-md">
       {/* Controls */}
       <div className="flex justify-between items-center mb-4">
         {/* Search Bar */}
@@ -107,9 +106,10 @@ const CryptoTable = ({ onCryptoSelect }) => {
           <tbody>
             {filteredCryptos.slice(0, 10).map((crypto, idx) => (
               <tr 
-              key={idx} 
-              className="hover:bg-cardHover transition"
-              onClick={() => onCryptoSelect(crypto.symbol)}>
+                key={idx} 
+                className="hover:bg-cardHover transition"
+                onClick={() => onCryptoSelect(crypto.symbol)}
+              >
                 <td className="py-2">{crypto.name}</td>
                 <td className="py-2">{crypto.symbol}</td>
                 <td className="py-2">${crypto.price}</td>

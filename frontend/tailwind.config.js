@@ -13,7 +13,7 @@ export default {
         cardHover: "rgba(255, 255, 255, 0.2)",
       },
       boxShadow: {
-        neon: "0 0 10px orange, 0 0 20px orange",
+        neon: "0 0 10px blue, 0 0 20px white",
       },
     },
   },
