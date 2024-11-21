@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fetchLiveCryptoData } from "../../API/cryptoAPI"; // Adjust the path based on your frontend's folder structure
+import { fetchLiveCryptoData } from "../../API/cryptoAPI"; 
 
-const CryptoTable = () => {
+const CryptoTable = ({ onCryptoSelect }) => {
   const [cryptos, setCryptos] = useState([]);
   const [filteredCryptos, setFilteredCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -9,17 +9,16 @@ const CryptoTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Live Data on Component Mount and set interval for dynamic updates
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
       try {
-        const data = await fetchLiveCryptoData(); // Fetch live data from the backend API
+        const data = await fetchLiveCryptoData(); 
         const formattedData = data.map((item) => ({
-          name: item.symbol, // Using `symbol` as the name
+          name: item.symbol, 
           symbol: item.symbol,
           price: parseFloat(item.lastPrice),
-          marketCap: parseFloat(item.quoteVolume), // Approximated as 24hr volume
+          marketCap: parseFloat(item.quoteVolume), 
         }));
         setCryptos(formattedData);
         setFilteredCryptos(formattedData);
@@ -32,12 +31,11 @@ const CryptoTable = () => {
       }
     };
 
-    getData(); // Fetch data initially
+    getData(); 
 
-    // Set up polling to fetch data every minute (15,000 ms)
-    const intervalId = setInterval(getData, 60000); // Fetch every minute
-
-    // Cleanup interval on component unmount
+    
+    const intervalId = setInterval(getData, 15000); 
+    
     return () => clearInterval(intervalId);
   }, []);
 
@@ -48,7 +46,7 @@ const CryptoTable = () => {
       if (sortKey === "name" || sortKey === "symbol") {
         return a[sortKey].localeCompare(b[sortKey]);
       }
-      return b[sortKey] - a[sortKey]; // Sort numerically (descending)
+      return b[sortKey] - a[sortKey]; 
     });
     setFilteredCryptos(sortedData);
   };
@@ -108,7 +106,10 @@ const CryptoTable = () => {
           </thead>
           <tbody>
             {filteredCryptos.slice(0, 10).map((crypto, idx) => (
-              <tr key={idx} className="hover:bg-cardHover transition">
+              <tr 
+              key={idx} 
+              className="hover:bg-cardHover transition"
+              onClick={() => onCryptoSelect(crypto.symbol)}>
                 <td className="py-2">{crypto.name}</td>
                 <td className="py-2">{crypto.symbol}</td>
                 <td className="py-2">${crypto.price}</td>
