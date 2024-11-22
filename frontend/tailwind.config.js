@@ -14,8 +14,16 @@ export default {
       },
       boxShadow: {
         neon: "0 0 10px blue, 0 0 20px white",
+        Gneon: "3px 5px 10px green, 3px 5px 10px gray",
+        Rneon: "3px 5px 10px red, 3px 5px 10px gray",
       },
+      
     },
+    
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+  ],
+
+  
 }

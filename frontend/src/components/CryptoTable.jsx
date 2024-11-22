@@ -13,13 +13,17 @@ const CryptoTable = ({ onCryptoSelect }) => {
     const getData = async () => {
       setLoading(false);
       try {
-        const data = await fetchLiveCryptoData(); 
-        const formattedData = data.map((item) => ({
-          name: item.symbol, 
+        const data = await fetchLiveCryptoData();
+        
+    
+        // Access `allData` explicitly
+        const formattedData = data.allData.map((item) => ({
+          name: item.symbol,
           symbol: item.symbol,
           price: parseFloat(item.lastPrice),
-          marketCap: parseFloat(item.quoteVolume), 
+          marketCap: parseFloat(item.quoteVolume),
         }));
+    
         setCryptos(formattedData);
         setFilteredCryptos(formattedData);
         setError(null);
@@ -30,10 +34,11 @@ const CryptoTable = ({ onCryptoSelect }) => {
         setLoading(false);
       }
     };
+    
 
     getData(); 
     
-    const intervalId = setInterval(getData, 1000); 
+    const intervalId = setInterval(getData, 10000); 
     
     return () => clearInterval(intervalId);
   }, []);
