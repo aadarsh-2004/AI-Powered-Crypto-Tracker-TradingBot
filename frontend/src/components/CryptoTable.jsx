@@ -68,9 +68,9 @@ const CryptoTable = ({ onCryptoSelect }) => {
   };
 
   return (
-    <div className="bg-cardBg p-8 rounded-xl shadow-md">
+    <div className="bg-cardBg p-8 rounded-xl shadow-md ">
       {/* Controls */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 ">
         {/* Search Bar */}
         <input
           type="text"

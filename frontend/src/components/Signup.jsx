@@ -53,33 +53,34 @@ const Signup = () => {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row h-screen bg-gray-100'>
+       <div className="flex flex-col md:flex-row h-screen bg-gradient-to-tr from-blue-900 via-gray-900 to-black text-white">
         {/* Left side form */}
-        <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white shadow-lg rounded-lg p-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+        <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-darkBg shadow-2xl rounded-lg p-8 border border-gray-800">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Create Your Account
           </h2>
           <form onSubmit={handleSignup} className="w-full max-w-sm">
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-400 font-medium mb-2 text-xl">
                 Email
               </label>
               <input
                 type="email"
-                className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full p-3 bg-cardBg text-white border border-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-neonGreen"
                 placeholder="you@example.com"
                 value={email}
+                name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-gray-400 font-medium mb-2 text-xl">
                 Password
               </label>
               <input
                 type="password"
-                className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full p-3 bg-cardBg text-white border border-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-neonGreen"
                 placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -88,18 +89,19 @@ const Signup = () => {
             </div>
             <button
               type="submit"
-              className="bg-orange-500 text-white w-full p-3 rounded-md hover:bg-orange-600 transition duration-200"
+              className="bg-neonGreen text-black w-full p-3 rounded-lg hover:scale-105 transition transform duration-200 shadow-lg"
             >
               Sign Up
             </button>
             
             {/* Google sign-in */}
-            <button
-            onClick={handleGoogleSignup}
-            className="bg-blue-500 text-white w-full p-3 rounded-md mt-4 hover:bg-blue-600 transition duration-200"
-          >
-            Sign Up with Google
-          </button>
+             {/* Google Login Button */}
+             <button
+              onClick={handleGoogleSignup}
+              className="bg-blue-600 text-white w-full p-3 rounded-lg mt-4 hover:scale-105 transition transform duration-200 shadow-lg"
+            >
+              SignUp with Google
+            </button>
           </form>
           {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
 
@@ -124,17 +126,29 @@ const Signup = () => {
             </button>
           </div> */}
 
-          <p className="mt-4 text-gray-600 text-center">
-            Already have an account?{" "}
-            <Link to="/login" className="text-orange-500 font-bold">
+          <p className="mt-6 text-gray-400 text-center text-lg">
+            Don't have an account?{" "}
+            <Link to="/" className="text-neonGreen font-bold hover:underline">
               Login
             </Link>
           </p>
         </div>
 
         {/* Right side with "Sign Up" banner */}
-        <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-orange-500 text-white p-8">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">Sign Up</h1>
+        <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-gradient-to-tr from-blue-900 via-black to-gray-900 p-8 relative">
+          <h1 className="text-5xl sm:text-6xl font-extrabold text-neonGreen mb-8">
+            SignUp
+          </h1>
+          <p className="text-xl text-gray-300 text-center">
+            Join the future of cryptocurrency trading
+          </p>
+  
+          {/* Futuristic Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-black to-blue-900 opacity-50 rounded-xl"></div>
+  
+          {/* Chart Glow Effect */}
+          <div className="absolute top-20 right-10 w-[300px] h-[300px] bg-gradient-to-br from-neonGreen to-transparent opacity-40 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-gradient-to-br from-blue-600 to-transparent opacity-30 rounded-full animate-pulse"></div>
         </div>
       </div>
 
