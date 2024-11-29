@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const EconomicCalendar = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -8,7 +8,7 @@ const EconomicCalendar = () => {
   useEffect(() => {
     const fetchEconomicCalendar = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/EC/economic-calendar");
+        const response = await fetch(`${API_BASE_URL}/api/EC/economic-calendar`);
         const data = await response.json();
         setEvents(data); // Set the fetched events
       } catch (err) {

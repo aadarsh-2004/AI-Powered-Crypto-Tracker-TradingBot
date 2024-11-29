@@ -1,12 +1,13 @@
 // smsRoutes.js
 const express = require('express');
 const twilio = require('twilio');
+require('dotenv').config();
 
 const router = express.Router();
 
 // Twilio Credentials
-const accountSid = 'ACb7c81eb60aec3c2e3d512323a8e524a3'; // Replace with your Twilio Account SID
-const authToken = '2aed2bbbcc92d5cf0487875f5e66945d'; // Replace with your Twilio Auth Token
+const accountSid = process.env.TWILIO_ACCOUNT_SID;  // Replace with your Twilio Account SID
+const authToken = process.env.TWILIO_AUTH_TOKEN; // Replace with your Twilio Auth Token
 const twilioPhone = '+19787375069'; // Replace with your Twilio phone number
 
 const client = twilio(accountSid, authToken);
