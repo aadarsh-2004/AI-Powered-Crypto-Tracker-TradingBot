@@ -42,7 +42,7 @@ To install and run the project locally, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone [https://github.com/aadarsh-2004/AI-Powered-Crypto-Tracker-TradingBot.git]
+   git clone  http://github.com/aadarsh-2004/AI-Powered-Crypto-Tracker-TradingBot.git
 1. **Navigate into the project directory:**:
    ```bash
    cd crypto-tracker
