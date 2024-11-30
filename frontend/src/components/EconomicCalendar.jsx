@@ -28,27 +28,41 @@ const EconomicCalendar = () => {
   return (
     <div className="bg-cardBg p-6 rounded-lg shadow-lg text-white">
       <h2 className="text-2xl font-bold mb-4">Economic Calendar</h2>
-      <div className="overflow-auto h-96">
+      <div className="overflow-x-auto h-96">
         <table className="w-full border-collapse text-sm text-left">
           <thead>
             <tr>
               <th className="border-b border-gray-700 p-2">Date</th>
               <th className="border-b border-gray-700 p-2">Country</th>
               <th className="border-b border-gray-700 p-2">Event</th>
-              <th className="border-b border-gray-700 p-2">Actual</th>
-              <th className="border-b border-gray-700 p-2">Forecast</th>
-              <th className="border-b border-gray-700 p-2">Previous</th>
+              <th className="border-b border-gray-700 p-2 hidden md:table-cell">
+                Actual
+              </th>
+              <th className="border-b border-gray-700 p-2 hidden md:table-cell">
+                Forecast
+              </th>
+              <th className="border-b border-gray-700 p-2 hidden lg:table-cell">
+                Previous
+              </th>
             </tr>
           </thead>
           <tbody>
             {events.map((event, index) => (
               <tr key={index} className="hover:bg-gray-800">
-                <td className="border-b border-gray-700 p-2">{new Date(event.date).toLocaleDateString()}</td>
+                <td className="border-b border-gray-700 p-2">
+                  {new Date(event.date).toLocaleDateString()}
+                </td>
                 <td className="border-b border-gray-700 p-2">{event.country}</td>
                 <td className="border-b border-gray-700 p-2">{event.event}</td>
-                <td className="border-b border-gray-700 p-2">{event.actual || "N/A"}</td>
-                <td className="border-b border-gray-700 p-2">{event.forecast || "N/A"}</td>
-                <td className="border-b border-gray-700 p-2">{event.previous || "N/A"}</td>
+                <td className="border-b border-gray-700 p-2 hidden md:table-cell">
+                  {event.actual || "N/A"}
+                </td>
+                <td className="border-b border-gray-700 p-2 hidden md:table-cell">
+                  {event.forecast || "N/A"}
+                </td>
+                <td className="border-b border-gray-700 p-2 hidden lg:table-cell">
+                  {event.previous || "N/A"}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -56,6 +70,7 @@ const EconomicCalendar = () => {
       </div>
     </div>
   );
+  
 };
 
 export default EconomicCalendar;

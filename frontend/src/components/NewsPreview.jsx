@@ -13,8 +13,8 @@ const NewsPreview = ({ onNewsClick }) => {
   }, []);
 
   return (
-    <div className=" bg-darkBg  p-4  rounded-2xl shadow-lg">
-      <h3 className="text-2xl  font-medium text-white mb-4">Crypto News</h3>
+    <div className="bg-darkBg p-4 rounded-2xl shadow-lg">
+      <h3 className="text-2xl font-medium text-white mb-4">Crypto News</h3>
       <ul className="space-y-4">
         {news.map((article, index) => (
           <li
@@ -23,20 +23,26 @@ const NewsPreview = ({ onNewsClick }) => {
             onClick={() => onNewsClick(article)} // Pass the article to the parent
           >
             <div className="flex items-center">
-            <img className="w-[40px] h-[40px ] rounded-lg mr-3" src={article.imageurl} alt="image" />
-            <h4 className="text-lg font-bold text-green-400">
-              {article.title}
-            </h4>
+              <img
+                className="w-10 h-10 rounded-lg mr-3 flex-shrink-0"
+                src={article.imageurl}
+                alt="news"
+              />
+              <div className="flex-1 overflow-hidden">
+                <h4 className="text-lg font-bold text-green-400 truncate">
+                  {article.title}
+                </h4>
+                <p className="text-gray-400 text-sm truncate">
+                  {article.body.slice(0, 100)}...
+                </p>
+              </div>
             </div>
-            
-            <p className="text-gray-400 text-sm truncate">
-              {article.body.slice(0, 100)}...
-            </p>
           </li>
         ))}
       </ul>
     </div>
   );
+  
 };
 
 export default NewsPreview;
